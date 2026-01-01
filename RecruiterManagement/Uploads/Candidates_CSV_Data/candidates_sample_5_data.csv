@@ -1,0 +1,6 @@
+id,first_name,last_name,email,phone,gender,date_of_birth,address,city,state,country,education,experience_years,current_position,expected_salary,skills
+1,Michael,Wang,michael.wang1@example.com,5827338342,Female,29-11-1987,7528 Christina Extension,New Daveport,Rhode Island,Micronesia,MBA,2,Backend Developer,90047,Node.js;Flutter;Next.js;Kotlin;MongoDB
+2,Cynthia,Rose,michael.wang1@example.com,6712160526,Other,27-08-1980,927 Donald Court Suite 121,Joshuachester,Kentucky,South Georgia and the South Sandwich Islands,BCA,0,Backend Developer,107429,MySQL;React
+3,Scott,Terry,scott.terry3@example.com,3638932819,Female,10-10-1981,7895 Johnson Hills,Christinafort,South Carolina,Niger,MBA,13,Project Manager,98423,React;AWS
+4,Sarah,Martin,sarah.martin4@example.com,5407773798,Other,19-04-1988,78620 Michele Oval Apt. 680,Lake Jean,Alabama,Falkland Islands (Malvinas),MBA,7,Backend Developer,82197,MySQL;Next.js;C#;MongoDB;PHP
+5,Christopher,Wagner,christopher.wagner5@example.com,4441292541,Male,22-06-1980,157 William Circles,Weisshaven,Minnesota,Cape Verde,MBA,10,Frontend Developer,121465,AWS;Next.js
