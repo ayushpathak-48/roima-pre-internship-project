@@ -218,7 +218,7 @@
                 </div>
 
                 <div class="w-full">
-                    <asp:Label ID="Label1" runat="server" CssClass="block text-sm font-medium text-gray-700 mb-1">Required Skills</asp:Label>
+                    <asp:Label ID="Label1" runat="server" CssClass="block text-sm font-medium text-gray-700 mb-1">Preffered Skills</asp:Label>
                     <div id="displayPreferredSkillsDiv" runat="server"></div>
                     <div class="scroll_checkboxes">
                         <asp:CheckBoxList runat="server" ID="preferredSkillsCheckboxList" RepeatDirection="Vertical" RepeatColumns="1"

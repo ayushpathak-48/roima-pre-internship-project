@@ -64,13 +64,15 @@ namespace RecruiterManagement.Jobs
         {
             using (MySqlConnection conn = DBConn.GetConnection())
             {
-                string query = "SELECT j.*, " +
-                    "GROUP_CONCAT(CASE when js.type = 'REQUIRED' THEN s.name END ORDER BY s.name SEPARATOR ', ') AS required_skills, " +
-                    "GROUP_CONCAT(CASE when js.type = 'PREFERRED' THEN s.name END ORDER BY s.name SEPARATOR ', ') AS preferred_skills " +
-                    "FROM jobs j " +
-                    "LEFT JOIN job_skills js ON j.id = js.job_id " +
-                    "LEFT JOIN skills s ON js.skill_id = s.id GROUP BY " +
-                    "j.id, j.name;";
+                string query = @"SELECT j.*, 
+                    GROUP_CONCAT(CASE when js.type = 'REQUIRED' THEN s.name END ORDER BY s.name SEPARATOR ', ') AS required_skills, 
+                    GROUP_CONCAT(CASE when js.type = 'PREFERRED' THEN s.name END ORDER BY s.name SEPARATOR ', ') AS preferred_skills,
+                    u.name as reviewer_name, u.email as reviewer_email
+                    FROM jobs j 
+                    LEFT JOIN job_skills js ON j.id = js.job_id 
+                    LEFT JOIN users u ON j.assigned_reviewer = u.id
+                    LEFT JOIN skills s ON js.skill_id = s.id 
+                    GROUP BY j.id, j.name;";
 
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -88,7 +90,9 @@ namespace RecruiterManagement.Jobs
                         SalaryFrom = reader["salary_range_start"].ToString(),
                         SalaryTo = reader["salary_range_end"].ToString(),
                         Stipend = reader["stipend"].ToString(),
-                        Type = reader["job_type"].ToString()
+                        Type = reader["job_type"].ToString(),
+                        ReviewerName = reader["reviewer_name"].ToString(),
+                        ReviewerEmail = reader["reviewer_email"].ToString()
                     };
 
                     JobsList.Add(job);

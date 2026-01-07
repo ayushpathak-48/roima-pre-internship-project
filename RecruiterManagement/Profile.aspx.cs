@@ -7,14 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace RecruiterManagement
 {
-    public partial class SiteMaster : MasterPage
+    public partial class Profile : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["loggedIn"] == null)
-            {
-                Response.Redirect("/Login");
-            }
+
         }
     }
 }

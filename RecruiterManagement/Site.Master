@@ -65,6 +65,7 @@
                         {
                     %>
                     <a class="text-white transition-all hover:bg-zinc-800 <%= Request.Path == "/Users" ? "bg-zinc-900" : ""%> border-y border-gray-700 p-2 px-4 w-full text-decoration-none" href="/Users">Users</a>
+                    <a class="text-white transition-all hover:bg-zinc-800 <%= Request.Path == "/Reviewers" ? "bg-zinc-900" : ""%> border-y border-gray-700 p-2 px-4 w-full text-decoration-none" href="/Reviewers">Reviewers</a>
                     <%
                         }
                         if (Session["role"].Equals("admin") || Session["role"].Equals("recruiter"))
@@ -78,7 +79,6 @@
                     %>
                     <a class="text-white transition-all hover:bg-zinc-800 <%= Request.Path == "/Jobs" ? "bg-zinc-900" : ""%> border-y border-gray-700 p-2 px-4 w-full text-decoration-none" href="/Jobs">Jobs</a>
                     <a class="text-white transition-all hover:bg-zinc-800 <%= Request.Path == "/Candidates" ? "bg-zinc-900" : ""%> border-y border-gray-700 p-2 px-4 w-full text-decoration-none" href="/Candidates">Candidates</a>
-                     <a class="text-white transition-all hover:bg-zinc-800 <%= Request.Path == "/Reviewers" ? "bg-zinc-900" : ""%> border-y border-gray-700 p-2 px-4 w-full text-decoration-none" href="/Reviewers">Reviewers</a>
                     <%
                         }
                     %>

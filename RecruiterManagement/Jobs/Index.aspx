@@ -24,6 +24,7 @@
                         <th scope="col" class="px-6 py-3">Description</th>
                         <th scope="col" class="px-6 py-3">Required Skills</th>
                         <th scope="col" class="px-6 py-3">Preferred Skills</th>
+                        <th scope="col" class="px-6 py-3">Reviewer</th>
                         <th scope="col" class="px-6 py-3">Status</th>
                         <th scope="col" class="px-6 py-3">Actions</th>
                     </tr>
@@ -47,17 +48,17 @@
                         <td
                             scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            <%= job.SalaryFrom %>
+                            <%= !String.IsNullOrEmpty(job.SalaryFrom) ? job.SalaryFrom:"-" %>
                         </td>
                         <td
                             scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            <%= job.SalaryTo %>
+                            <%= !String.IsNullOrEmpty(job.SalaryTo) ? job.SalaryTo:"-" %>
                         </td>
                         <td
                             scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            <%= job.Stipend %>
+                            <%= !String.IsNullOrEmpty(job.Stipend) ? job.Stipend:"-" %>
                         </td>
                         <td
                             scope="row"
@@ -73,6 +74,32 @@
                             scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden" title=" <%= job.Preferred_Skills %>">
                             <%= job.Preferred_Skills %>
+                        </td>
+                        <td
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden">
+                            <%
+                                if (String.IsNullOrEmpty(job.ReviewerName))
+                                {
+                            %>
+                            <span class="text-muted">Not Assigned
+                            </span>
+
+                            <%
+                                }
+                                else
+                                {
+                            %>
+
+                            <div>
+                                <%= job.ReviewerName %>
+                            </div>
+                            <div class="text-muted">
+                                <%= job.ReviewerEmail %>
+                            </div>
+                            <%
+                                }
+                            %>
                         </td>
                         <td
                             scope="row"
@@ -93,7 +120,7 @@
                                 class="text-decoration-none font-medium border !border-gray-500 !text-gray-500 p-1 px-2 rounded-sm">Change Status</a>
                             <a
                                 href="/Jobs/AssignReviewer?id=<%=job.Id %>"
-                                class="text-decoration-none font-medium border !border-gray-500 !text-gray-500 p-1 px-2 rounded-sm">Assign Reviewer</a>
+                                class="text-decoration-none font-medium border !border-gray-500 !text-gray-500 p-1 px-2 rounded-sm"><%= String.IsNullOrEmpty(job.ReviewerName) ? "Assign Reviewer":"Change Reviewer" %></a>
                         </td>
                     </tr>
                     <% }); %>

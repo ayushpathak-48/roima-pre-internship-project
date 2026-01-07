@@ -8,8 +8,8 @@
             </div>
             <a href="/Skills/Add" class="text-decoration-none bg-gray-700 p-2 px-3 !rounded-sm text-white">Add Skill</a>
         </div>
-        <div class="relative overflow-x-auto">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 border">
+        <div class="pb-10">
+            <table class="w-full text-sm text-left  text-gray-500 border">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 !border-b-2">
                     <tr>
                         <th scope="col" class="px-6 py-3">Id

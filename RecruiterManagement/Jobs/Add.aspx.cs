@@ -31,7 +31,7 @@ namespace RecruiterManagement.Jobs
             {
                 string query = "INSERT INTO jobs (`name`,`description`,`salary_range_start`,`salary_range_end`,`stipend`,`job_type`) VALUES (@Name,@Description,@SalaryStart,@SalaryEnd,@Stipend,@JobType)";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Name", name);
+                cmd.Parameters.AddWithValue("@Name", name); 
                 cmd.Parameters.AddWithValue("@Description", description);
                 cmd.Parameters.AddWithValue("@SalaryStart", salary_from);
                 cmd.Parameters.AddWithValue("@SalaryEnd", salary_to);

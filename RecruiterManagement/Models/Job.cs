@@ -17,5 +17,8 @@ namespace RecruiterManagement.Models
         public string Type { get; set; }
         public string Required_Skills { get; set; }
         public string Preferred_Skills { get; set; }
+
+        public string ReviewerName { get; set; }
+        public string ReviewerEmail { get; set; }
     }
 }

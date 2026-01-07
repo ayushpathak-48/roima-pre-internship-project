@@ -96,10 +96,10 @@
                             <%= candidate.Expected_Salary%>
                         </td>
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 max-w-[300px] text-ellipsis whitespace-nowrap overflow-hidden" title=" <%= candidate.Skills%>">
-                            <%= candidate.Skills%>
+                            <%= candidate.Skills %>
                         </td>
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            <%= candidate.Status%>
+                            <%= candidate.Status %>
                         </td>
                         <td class="px-6 py-4 min-w-max flex items-center justify-center gap-2">
                             <a href="/Candidates/Update?id=<%=candidate.ID %>" class="text-decoration-none font-medium border border-primary p-1 px-2 rounded-sm min-w-max">Update</a>
