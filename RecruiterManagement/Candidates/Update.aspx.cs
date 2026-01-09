@@ -20,25 +20,42 @@ namespace RecruiterManagement.Candidates
                 Response.Redirect("/Login");
             }
 
-            else if (!Session["role"].Equals("admin") && !Session["role"].Equals("recruiter"))
+            else if (!Session["role"].Equals("admin") && !Session["role"].Equals("recruiter") && !Session["role"].Equals("candidate"))
             {
                 Response.Redirect("/");
             }
 
             if (!IsPostBack)
             {
-                LoadSkills();
                 string candidateIdStr = Request.QueryString["id"];
+
+                if (Session["role"].Equals("candidate"))
+                {
+                    using (MySqlConnection conn = DBConn.GetConnection())
+                    {
+                        string query = "SELECT id FROM candidates WHERE user_id=@UserId";
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@UserId", Session["userId"].ToString());
+                        MySqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            candidateIdStr = reader["id"].ToString();
+                        }
+                    }
+                }
+
                 if (!string.IsNullOrEmpty(candidateIdStr))
                 {
                     long candidateId = Convert.ToInt64(candidateIdStr);
                     hiddenCandidateId.Value = candidateIdStr;
+                    LoadSkills();
                     LoadCandidateDetails(candidateId);
                 }
                 else
                 {
                     Response.Redirect("/Candidates?action=update&success=false");
                 }
+
             }
         }
 
@@ -96,7 +113,7 @@ WHERE c.id = @CandidateId";
                 }
                 reader.Close();
 
-                
+
                 string skillQuery = "SELECT skill_id FROM candidate_skills WHERE candidate_id = @CandidateId";
                 MySqlCommand skillCmd = new MySqlCommand(skillQuery, conn);
                 skillCmd.Parameters.AddWithValue("@CandidateId", candidateId);
@@ -141,7 +158,7 @@ WHERE c.id = @CandidateId";
                 updateUserCmd.Parameters.AddWithValue("@Email", txtEmail.Text);
                 updateUserCmd.ExecuteNonQuery();
 
-             
+
                 string updateCandidateQuery = @"UPDATE candidates SET 
 phone=@Phone, gender=@Gender, date_of_birth=@DOB, address=@Address, city=@City, state=@State, 
 education=@Education, experience_years=@ExpYears, current_position=@CurrentPosition, 
@@ -161,7 +178,7 @@ WHERE id=@CandidateId";
                 updateCandidateCmd.Parameters.AddWithValue("@CandidateId", candidateId);
                 updateCandidateCmd.ExecuteNonQuery();
 
-                
+
                 string deleteOldSkills = "DELETE FROM candidate_skills WHERE candidate_id=@CandidateId";
                 MySqlCommand deleteCmd = new MySqlCommand(deleteOldSkills, conn);
                 deleteCmd.Parameters.AddWithValue("@CandidateId", candidateId);

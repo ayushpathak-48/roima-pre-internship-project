@@ -128,9 +128,9 @@
                 </div>
 
 
-                <div class="flex justify-between border-b pb-2">
+                <div class="flex justify-between border-b pb-2 flex-col">
                     <span class="text-gray-500 text-sm">Skills</span>
-                    <span class="inline-block px-3 py-1 text-sm rounded-full bg-slate-100 text-slate-700 font-medium">
+                    <span class="inline-block px-3 py-1 text-sm rounded-md bg-slate-100 text-slate-700 font-medium">
                         <asp:Label ID="skills" runat="server"></asp:Label>
                     </span>
                 </div>
@@ -139,7 +139,10 @@
                 %>
             </div>
 
-            <div class="mt-6 flex w-full">
+
+            <div class="mt-6 flex w-full gap-3">
+                <a href="/Candidates/Update"
+                    class="flex-1 text-center text-black text-decoration-none bg-gray-900 hover:bg-gray-800 text-gray-300 py-2 rounded-lg font-medium transition w-full">Edit Profile</a>
                 <a href="/Logout"
                     class="flex-1 text-center text-black text-decoration-none bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 rounded-lg font-medium transition w-full">Logout</a>
             </div>
