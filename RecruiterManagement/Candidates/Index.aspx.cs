@@ -14,6 +14,18 @@ namespace RecruiterManagement.Candidates
         public List<Candidate> candidatesList = new List<Candidate>();
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("/Login");
+            }
+
+            else if (!Session["role"].Equals("admin") && !Session["role"].Equals("recruiter") && !Session["role"].Equals("viewer"))
+            {
+                Response.Redirect("/");
+            }
+
+
             loadCandidates();
             string action = Request.Params.Get("action");
             string success = Request.Params.Get("success");

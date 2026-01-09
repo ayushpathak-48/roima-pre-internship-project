@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2026 at 08:26 PM
+-- Generation Time: Jan 09, 2026 at 09:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -40,18 +40,20 @@ CREATE TABLE `candidates` (
   `experience_years` varchar(20) DEFAULT NULL,
   `current_position` varchar(150) DEFAULT NULL,
   `expected_salary` varchar(50) DEFAULT NULL,
-  `status_id` int(11) DEFAULT NULL
+  `status_id` int(11) DEFAULT NULL,
+  `college` varchar(100) NOT NULL,
+  `university` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `candidates`
 --
 
-INSERT INTO `candidates` (`id`, `user_id`, `phone`, `gender`, `date_of_birth`, `address`, `city`, `state`, `education`, `experience_years`, `current_position`, `expected_salary`, `status_id`) VALUES
-(1, 18, '5827338342', 'Female', '1987-11-29', '7528 Christina Extension', 'New Daveport', 'Rhode Island', 'MBA', '2', 'Backend Developer', '90047', 1),
-(2, 19, '3638932819', 'Female', '1981-10-10', '7895 Johnson Hills', 'Christinafort', 'South Carolina', 'MBA', '13', 'Project Manager', '98423', 1),
-(3, 20, '5407773798', 'Other', '1988-04-19', '78620 Michele Oval Apt. 680', 'Lake Jean', 'Alabama', 'MBA', '7', 'Backend Developer', '82197', 1),
-(4, 21, '4441292541', 'Male', '1980-06-22', '157 William Circles', 'Weisshaven', 'Minnesota', 'MBA', '10', 'Frontend Developer', '121465', 1);
+INSERT INTO `candidates` (`id`, `user_id`, `phone`, `gender`, `date_of_birth`, `address`, `city`, `state`, `education`, `experience_years`, `current_position`, `expected_salary`, `status_id`, `college`, `university`) VALUES
+(1, 18, '5827338342', 'Female', '1987-11-29', '7528 Christina Extension', 'New Daveport', 'Rhode Island', 'MBA', '2', 'Backend Developer', '90047', 1, '', ''),
+(2, 19, '3638932819', 'Female', '1981-10-10', '7895 Johnson Hills', 'Christinafort', 'South Carolina', 'MBA', '13', 'Project Manager', '98423', 1, '', ''),
+(3, 20, '5407773798', 'Other', '1988-04-19', '78620 Michele Oval Apt. 680', 'Lake Jean', 'Alabama', 'MBA', '7', 'Backend Developer', '82197', 1, '', ''),
+(4, 21, '4441292541', 'Male', '1980-06-22', '157 William Circles', 'Weisshaven', 'Minnesota', 'MBA', '10', 'Frontend Developer', '121465', 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -108,6 +110,29 @@ INSERT INTO `candidate_status` (`id`, `status`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `degrees`
+--
+
+CREATE TABLE `degrees` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `degrees`
+--
+
+INSERT INTO `degrees` (`id`, `name`, `created_at`) VALUES
+(1, 'MCA', '2026-01-07 20:15:41'),
+(2, 'BCA', '2026-01-07 20:15:41'),
+(3, 'BTECH', '2026-01-07 20:15:41'),
+(4, 'BCOM', '2026-01-07 20:15:41'),
+(5, 'BBA', '2026-01-07 20:15:41');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jobs`
 --
 
@@ -150,6 +175,18 @@ CREATE TABLE `job_comments` (
 
 INSERT INTO `job_comments` (`id`, `comment`, `job_id`, `status`) VALUES
 (1, 'Test comment', 1, 'HOLD');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_eligible_degrees`
+--
+
+CREATE TABLE `job_eligible_degrees` (
+  `id` int(11) NOT NULL,
+  `job_id` int(11) NOT NULL,
+  `degree_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -287,6 +324,12 @@ ALTER TABLE `candidate_status`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `degrees`
+--
+ALTER TABLE `degrees`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `jobs`
 --
 ALTER TABLE `jobs`
@@ -298,6 +341,14 @@ ALTER TABLE `jobs`
 --
 ALTER TABLE `job_comments`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `job_eligible_degrees`
+--
+ALTER TABLE `job_eligible_degrees`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `degree_id` (`degree_id`),
+  ADD KEY `job_id` (`job_id`);
 
 --
 -- Indexes for table `job_skills`
@@ -350,6 +401,12 @@ ALTER TABLE `candidate_status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `degrees`
+--
+ALTER TABLE `degrees`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
@@ -360,6 +417,12 @@ ALTER TABLE `jobs`
 --
 ALTER TABLE `job_comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `job_eligible_degrees`
+--
+ALTER TABLE `job_eligible_degrees`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `job_skills`
@@ -400,6 +463,13 @@ ALTER TABLE `candidates`
 --
 ALTER TABLE `jobs`
   ADD CONSTRAINT `jobs_ibfk_1` FOREIGN KEY (`assigned_reviewer`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `job_eligible_degrees`
+--
+ALTER TABLE `job_eligible_degrees`
+  ADD CONSTRAINT `job_eligible_degrees_ibfk_1` FOREIGN KEY (`degree_id`) REFERENCES `degrees` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `job_eligible_degrees_ibfk_2` FOREIGN KEY (`job_id`) REFERENCES `jobs` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `job_skills`

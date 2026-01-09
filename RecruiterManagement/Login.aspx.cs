@@ -24,7 +24,7 @@ namespace RecruiterManagement
                 string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
                 using (MySqlConnection conn = DBConn.GetConnection())
                 {
-                    string query = "SELECT users.email,users.password,users.name,roles.role_name FROM users RIGHT JOIN roles ON users.role_id = roles.id WHERE email=@Email";
+                    string query = "SELECT users.*,roles.role_name FROM users RIGHT JOIN roles ON users.role_id = roles.id WHERE email=@Email";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@Email", email);
                     using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -37,11 +37,13 @@ namespace RecruiterManagement
                             {
                                 String role = reader["role_name"].ToString();
                                 Session["email"] = email;
+                                Session["userId"] = reader["id"].ToString();
                                 Session["name"] = reader["name"];
                                 Session["loggedIn"] = true;
                                 Session["role"] = role;
-                                if(role == "recruiter") Response.Redirect("/Jobs");
-                                Response.Redirect("/");
+                                if(role == "recruiter" || role == "reviewer") Response.Redirect("/Jobs");
+                                if (role == "candidate") Response.Redirect("/");
+                                if (role == "admin") Response.Redirect("/Users");
                             }
                             else
                             {

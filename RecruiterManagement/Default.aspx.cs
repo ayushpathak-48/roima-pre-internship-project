@@ -16,15 +16,27 @@ namespace RecruiterManagement
         public Dictionary<string, string> stats = new Dictionary<string, string> { };
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["loggedIn"] != null)
-                if (Session["role"].Equals("admin"))
-                {
-                    LoadAdminStats();
-                }
-                else if (Session["role"].Equals("candidate"))
-                {
-                    LoadJobs();
-                }
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("/Login");
+            }
+            if (Session["role"].Equals("recruiter"))
+                Response.Redirect("/Jobs");
+
+            else if (Session["role"].Equals("viewer"))
+                Response.Redirect("/Users");
+
+            else if (Session["role"].Equals("reviewer"))
+                Response.Redirect("/Review");
+
+            if (Session["role"].Equals("admin"))
+            {
+                LoadAdminStats();
+            }
+            else if (Session["role"].Equals("candidate"))
+            {
+                LoadJobs();
+            }
         }
 
         private void LoadAdminStats()

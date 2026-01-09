@@ -14,6 +14,16 @@ namespace RecruiterManagement.Jobs
         public List<Job> JobsList = new List<Job>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("/Login");
+            }
+
+            else if (!Session["role"].Equals("admin") && !Session["role"].Equals("recruiter") && !Session["role"].Equals("viewer"))
+            {
+                Response.Redirect("/");
+            }
+
             LoadJobs();
 
             string action = Request.Params.Get("action");

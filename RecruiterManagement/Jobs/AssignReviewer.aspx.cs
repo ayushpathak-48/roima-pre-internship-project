@@ -17,6 +17,15 @@ namespace RecruiterManagement.Jobs
         public int assignedReviewerId;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("/Login");
+            }
+
+            else if (!Session["role"].Equals("admin") && !Session["role"].Equals("recruiter"))
+            {
+                Response.Redirect("/");
+            }
             jobId = Convert.ToInt32(Request.Params["id"]);
             if (!IsPostBack)
             {

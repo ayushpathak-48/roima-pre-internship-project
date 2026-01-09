@@ -10,7 +10,7 @@ namespace RecruiterManagement.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }  // optional
+        public string Password { get; set; }  
         public string Role { get; set; }
     }
 }

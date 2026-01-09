@@ -15,6 +15,15 @@ namespace RecruiterManagement.Reviewers
         public List<Role> RolesList = new List<Role>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("/Login");
+            }
+
+            else if (!Session["role"].Equals("admin") && !Session["role"].Equals("recruiter"))
+            {
+                Response.Redirect("/");
+            }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)

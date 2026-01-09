@@ -15,6 +15,16 @@ namespace RecruiterManagement.Jobs
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("/Login");
+            }
+
+            else if (!Session["role"].Equals("admin") && !Session["role"].Equals("recruiter"))
+            {
+                Response.Redirect("/");
+            }
+
             if (!long.TryParse(Request.QueryString["id"], out jobId))
             {
                 Response.Redirect("/Users?action=update&success=false");

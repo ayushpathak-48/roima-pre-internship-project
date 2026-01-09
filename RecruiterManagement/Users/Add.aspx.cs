@@ -15,6 +15,16 @@ namespace RecruiterManagement.Users
         public List<Role> RolesList = new List<Role>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("/Login");
+            }
+
+            else if (!Session["role"].Equals("admin") && !Session["role"].Equals("recruiter") )
+            {
+                Response.Redirect("/");
+            }
+
             if (!IsPostBack)
             {
                 loadRoles();

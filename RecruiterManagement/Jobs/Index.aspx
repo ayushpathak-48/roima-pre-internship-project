@@ -6,9 +6,15 @@
     <div class="flex flex-col gap-3 p-5">
         <div class="flex items-center justify-between">
             <div class="font-semibold text-xl">All Jobs</div>
+            <%if (!Session["role"].Equals("viewer"))
+                {
+            %>
             <a
                 href="/Jobs/Add"
                 class="text-decoration-none bg-gray-700 p-2 px-3 !rounded-sm text-white">Add Job</a>
+            <%
+                }
+            %>
         </div>
         <div class="relative overflow-x-auto">
             <table
@@ -26,7 +32,14 @@
                         <th scope="col" class="px-6 py-3">Preferred Skills</th>
                         <th scope="col" class="px-6 py-3">Reviewer</th>
                         <th scope="col" class="px-6 py-3">Status</th>
-                        <th scope="col" class="px-6 py-3">Actions</th>
+                        <%if (!Session["role"].Equals("viewer"))
+                            {
+                        %>
+                        <th scope="col" class="px-6 py-3">Actions
+                        </th>
+                        <%
+                            }
+                        %>
                     </tr>
                 </thead>
                 <tbody>
@@ -107,6 +120,9 @@
                             <%= job.Status %>
                         </td>
 
+                        <%if (!Session["role"].Equals("viewer"))
+                            {
+                        %>
                         <td class="px-6 py-4 flex min-w-max gap-2">
                             <a
                                 href="/Jobs/Update?id=<%=job.Id %>"
@@ -122,6 +138,9 @@
                                 href="/Jobs/AssignReviewer?id=<%=job.Id %>"
                                 class="text-decoration-none font-medium border !border-gray-500 !text-gray-500 p-1 px-2 rounded-sm"><%= String.IsNullOrEmpty(job.ReviewerName) ? "Assign Reviewer":"Change Reviewer" %></a>
                         </td>
+                        <%
+                            }
+                        %>
                     </tr>
                     <% }); %>
                 </tbody>

@@ -15,6 +15,16 @@ namespace RecruiterManagement.Jobs
         private string jobId;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("/Login");
+            }
+
+            else if (!Session["role"].Equals("admin") && !Session["role"].Equals("recruiter"))
+            {
+                Response.Redirect("/");
+            }
+
             jobId = Request.QueryString["id"];
             if (IsPostBack) return;
             if (String.IsNullOrEmpty(jobId))

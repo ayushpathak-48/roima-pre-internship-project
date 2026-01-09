@@ -17,6 +17,16 @@ namespace RecruiterManagement.Candidates
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("/Login");
+            }
+
+            else if (!Session["role"].Equals("admin") && !Session["role"].Equals("recruiter"))
+            {
+                Response.Redirect("/");
+            }
+
             if (IsPostBack) return;
             LoadSkills();
         }

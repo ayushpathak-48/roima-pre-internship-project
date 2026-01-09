@@ -12,6 +12,15 @@ namespace RecruiterManagement.Users
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("/Login");
+            }
+
+            else if (!Session["role"].Equals("admin") && !Session["role"].Equals("recruiter"))
+            {
+                Response.Redirect("/");
+            }
             string userId = Request.QueryString["id"];
             Response.Write(userId);
             if (userId.Length == 0)

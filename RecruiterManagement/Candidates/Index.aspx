@@ -7,10 +7,16 @@
             <div class="font-semibold text-xl">
                 All Candidates
             </div>
+            <%if (!Session["role"].Equals("viewer"))
+                {
+            %>
             <div class="flex items-center gap-2">
                 <a href="/Candidates/BulkUpload" class="text-decoration-none border  border-gray-700 p-2 px-3 !rounded-sm !text-gray-700">Bulk Upload</a>
                 <a href="/Candidates/Add" class="text-decoration-none bg-gray-700 p-2 px-3 !rounded-sm text-white">Add Candidate</a>
             </div>
+            <%
+                }
+            %>
         </div>
         <div class="relative overflow-x-auto">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 border">
@@ -46,8 +52,14 @@
                         </th>
                         <th scope="col" class="px-6 py-3">Status
                         </th>
+                        <%if (!Session["role"].Equals("viewer"))
+                            {
+                        %>
                         <th scope="col" class="px-6 py-3">Actions
                         </th>
+                        <%
+                            }
+                        %>
                     </tr>
                 </thead>
                 <tbody>
@@ -101,10 +113,17 @@
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             <%= candidate.Status %>
                         </td>
+
+                        <%if (!Session["role"].Equals("viewer"))
+                            {
+                        %>
                         <td class="px-6 py-4 min-w-max flex items-center justify-center gap-2">
                             <a href="/Candidates/Update?id=<%=candidate.ID %>" class="text-decoration-none font-medium border border-primary p-1 px-2 rounded-sm min-w-max">Update</a>
                             <a href="/Candidates/Delete?id=<%=candidate.ID %>" class="text-decoration-none font-medium border !border-red-500 !text-red-500 p-1 px-2 rounded-sm min-w-max" onclick="return confirm('Are you sure you want to delete?');">Delete</a>
                         </td>
+                        <%
+                            }
+                        %>
                     </tr>
                     <%
                         });

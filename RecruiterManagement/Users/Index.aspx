@@ -6,7 +6,14 @@
             <div class="font-semibold text-xl">
                 All Users
             </div>
+            <%if (!Session["role"].Equals("viewer"))
+                {
+            %>
             <a href="/Users/Add" class="text-decoration-none bg-gray-700 p-2 px-3 !rounded-sm text-white">Add User</a>
+
+            <%
+                }
+            %>
         </div>
         <div class="relative overflow-x-auto">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 border">
@@ -20,8 +27,14 @@
                         </th>
                         <th scope="col" class="px-6 py-3">Role
                         </th>
+                        <%if (!Session["role"].Equals("viewer"))
+                            {
+                        %>
                         <th scope="col" class="px-6 py-3">Actions
                         </th>
+                        <%
+                            }
+                        %>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,10 +52,16 @@
                         </td>
                         <td class="px-6 py-4"><%= user.Role %>
                         </td>
+                        <%if (!Session["role"].Equals("viewer"))
+                            {
+                        %>
                         <td class="px-6 py-4">
                             <a href="/Users/Update?id=<%=user.Id %>" class="text-decoration-none font-medium border border-primary p-1 px-2 rounded-sm">Update</a>
                             <a href="/Users/Delete?id=<%=user.Id %>" class="text-decoration-none font-medium border !border-red-500 !text-red-500 p-1 px-2 rounded-sm" onclick="return confirm('Are you sure you want to delete?');">Delete</a>
                         </td>
+                        <%
+                            }
+                        %>
                     </tr>
                     <%
                         });
