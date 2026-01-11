@@ -15,6 +15,33 @@ namespace RecruiterManagement.Candidates
     {
 
         /// <summary>
+        /// cvUploadControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload cvUploadControl;
+
+        /// <summary>
+        /// uploadBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button uploadBtn;
+
+        /// <summary>
+        /// lblCvStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCvStatus;
+
+        /// <summary>
         /// hiddenCandidateId control.
         /// </summary>
         /// <remarks>

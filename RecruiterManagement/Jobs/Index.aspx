@@ -31,6 +31,7 @@
                         <th scope="col" class="px-6 py-3">Required Skills</th>
                         <th scope="col" class="px-6 py-3">Preferred Skills</th>
                         <th scope="col" class="px-6 py-3">Reviewer</th>
+                        <th scope="col" class="px-6 py-3">Applied Candidates</th>
                         <th scope="col" class="px-6 py-3">Status</th>
                         <%if (!Session["role"].Equals("viewer"))
                             {
@@ -78,6 +79,7 @@
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             <%= job.Description %>
                         </td>
+
                         <td
                             scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap max-w-[200px] text-ellipsis whitespace-nowrap overflow-hidden" title=" <%= job.Required_Skills %>">
@@ -113,6 +115,11 @@
                             <%
                                 }
                             %>
+                        </td>
+                        <td
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            <%= job.AppliedCount %>
                         </td>
                         <td
                             scope="row"

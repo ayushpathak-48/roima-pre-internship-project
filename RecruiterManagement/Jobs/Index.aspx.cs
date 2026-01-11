@@ -77,11 +77,13 @@ namespace RecruiterManagement.Jobs
                 string query = @"SELECT j.*, 
                     GROUP_CONCAT(CASE when js.type = 'REQUIRED' THEN s.name END ORDER BY s.name SEPARATOR ', ') AS required_skills, 
                     GROUP_CONCAT(CASE when js.type = 'PREFERRED' THEN s.name END ORDER BY s.name SEPARATOR ', ') AS preferred_skills,
-                    u.name as reviewer_name, u.email as reviewer_email
+                    u.name as reviewer_name, u.email as reviewer_email,
+                    COUNT(DISTINCT caj.id) as applied_count
                     FROM jobs j 
                     LEFT JOIN job_skills js ON j.id = js.job_id 
                     LEFT JOIN users u ON j.assigned_reviewer = u.id
                     LEFT JOIN skills s ON js.skill_id = s.id 
+                    LEFT JOIN candidate_applied_jobs caj ON caj.job_id = j.id 
                     GROUP BY j.id, j.name;";
 
 
@@ -102,7 +104,8 @@ namespace RecruiterManagement.Jobs
                         Stipend = reader["stipend"].ToString(),
                         Type = reader["job_type"].ToString(),
                         ReviewerName = reader["reviewer_name"].ToString(),
-                        ReviewerEmail = reader["reviewer_email"].ToString()
+                        ReviewerEmail = reader["reviewer_email"].ToString(),
+                        AppliedCount = reader["applied_count"].ToString()
                     };
 
                     JobsList.Add(job);

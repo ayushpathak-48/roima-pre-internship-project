@@ -11,6 +11,7 @@ namespace RecruiterManagement.Models
         public string Name { get; set; }
         public string Status { get; set; }
         public string Description { get; set; }
+        public string AppliedCount { get; set; }
         public string SalaryFrom { get; set; }
         public string SalaryTo { get; set; }
         public string Stipend { get; set; }

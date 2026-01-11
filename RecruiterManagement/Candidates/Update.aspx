@@ -21,16 +21,16 @@
             font-size: 14px;
         }
 
-        .skill-pill .remove-btn {
-            margin-left: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            color: #0b3d91;
-        }
+            .skill-pill .remove-btn {
+                margin-left: 8px;
+                cursor: pointer;
+                font-weight: bold;
+                color: #0b3d91;
+            }
 
-        .skill-pill .remove-btn:hover {
-            color: #ff0000;
-        }
+                .skill-pill .remove-btn:hover {
+                    color: #ff0000;
+                }
     </style>
 
     <script>
@@ -74,7 +74,43 @@
                 }
             });
         });
+
+        function toggleResumeClick(type) {
+            let viewResumeDiv = document.getElementById("viewResumeDiv");
+            let uploadResumeDiv = document.getElementById("uploadResumeDiv");
+            let cancelUpdateBtn = document.getElementById("cancelUpdateBtn");
+            if (type == "show") {
+                viewResumeDiv.setAttribute("hidden", true);
+                uploadResumeDiv.removeAttribute("hidden");
+            } else {
+                viewResumeDiv.removeAttribute("hidden");
+                uploadResumeDiv.setAttribute("hidden", true);
+            }
+        }
     </script>
+
+    <div class="flex items-center justify-center gap-3 py-2">
+        <asp:Label Text="CV" runat="server" CssClass="block text-sm font-medium text-gray-700 mb-1" />
+        <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-2" id="viewResumeDiv" <%= String.IsNullOrEmpty(cvFilePath) ? "hidden" : "" %>>
+                <a class="bg-gray-700 rounded-md text-white p-2 px-3 text-decoration-none" href="/ViewCV.aspx?file=<%=cvFilePath %>" target="_blank">View Resume
+                </a>
+                <button class="border border-gray-700 rounded-md p-2 px-3 h-max" type="button" id="toggleUpdateBtn" onclick="toggleResumeClick('show')">
+                    Update Resume
+                </button>
+            </div>
+            <div class="flex gap-2 items-center" id="uploadResumeDiv" <%= !String.IsNullOrEmpty(cvFilePath) ? "hidden" : "" %>>
+                <asp:FileUpload ID="cvUploadControl" runat="server" class="border border-gray-500 p-3 rounded-sm" />
+                <asp:Button ID="uploadBtn" runat="server" OnClick="uploadBtn_Click" Text="Upload" class="bg-gray-700 rounded-md text-white p-2 px-3 h-max" />
+                <button type="button" class="border border-gray-700 rounded-md p-2 px-3 h-max" id="cancelUpdateBtn" onclick="toggleResumeClick('hide')">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <asp:Label runat="server" ID="lblCvStatus" />
+    </div>
 
     <div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
         <div class="max-w-md w-full bg-white rounded-xl shadow-lg p-8 flex items-center justify-center flex-col gap-2">
@@ -83,8 +119,11 @@
             <div class="flex flex-col gap-2 w-full">
                 <asp:HiddenField ID="hiddenCandidateId" runat="server" />
 
+
+
                 <asp:Label Text="Name" runat="server" CssClass="block text-sm font-medium text-gray-700 mb-1" />
                 <asp:TextBox ID="txtName" runat="server" CssClass="min-w-full px-4 py-2 border border-gray-300 rounded-lg" />
+
 
                 <asp:Label Text="Email" runat="server" CssClass="block text-sm font-medium text-gray-700 mb-1" />
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="min-w-full px-4 py-2 border border-gray-300 rounded-lg" ReadOnly="true" />

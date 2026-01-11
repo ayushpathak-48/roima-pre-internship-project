@@ -263,6 +263,7 @@
     <Content Include="Users\Delete.aspx" />
     <Content Include="Users\Index.aspx" />
     <Content Include="Users\Update.aspx" />
+    <Content Include="ViewCv.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -393,6 +394,7 @@
     <Compile Include="Review.aspx.designer.cs">
       <DependentUpon>Review.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MailHelper.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -490,6 +492,13 @@
     </Compile>
     <Compile Include="Users\Update.aspx.designer.cs">
       <DependentUpon>Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCv.aspx.cs">
+      <DependentUpon>ViewCv.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewCv.aspx.designer.cs">
+      <DependentUpon>ViewCv.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
